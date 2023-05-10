@@ -15,7 +15,7 @@ const App=()=>{
     <stack.Navigator screenOptions={{headerShown:false}}>
       <stack.Screen name='Home' component={Homescreen} />
       <stack.Screen name='Login' component={LoginScreen}/>
-      <stack.Screen name='Signup' component={SignUpScreen}/>
+      <stack.Screen name='SignUp' component={SignUpScreen}/>
       <stack.Screen name='ForgotPassword' component={ForgotPasswordScreen}/>
 
     </stack.Navigator>

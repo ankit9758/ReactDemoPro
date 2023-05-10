@@ -1,14 +1,16 @@
 
 import { StyleSheet } from "react-native"
-import { green, white } from "./colors";
+import { black, green, white } from "./colors";
 
 const stylesApp=StyleSheet.create({
     screenContainer: {
         flex: 1,
-       justifyContent:"center",
+      
       },
       appButtonContainer: {
-        backgroundColor:green,
+        justifyContent:'center',
+        alignContent:'center',
+        flexDirection:"row",
         elevation: 8,
         borderRadius: 30,
         paddingVertical: 10,
@@ -25,10 +27,25 @@ const stylesApp=StyleSheet.create({
       },
       appTextBold64: {
         fontSize: 64,
-        color: green,
+        color: white,
         fontWeight: "bold",
         alignSelf: 'flex-start',
-      }
+      },
+      appButton: {
+        padding: 12,
+      },
+      appTextBold40: {
+        fontSize: 40,
+        color: black,
+        fontWeight: "bold",
+      
+      },
+      appTextBold20: {
+        fontSize: 20,
+        color: black,
+        fontWeight: "bold",
+      
+      },
 })
 
 export default stylesApp;
