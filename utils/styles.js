@@ -46,6 +46,12 @@ const stylesApp=StyleSheet.create({
         fontWeight: "bold",
       
       },
+      appTextBold16: {
+        fontSize: 16,
+        color: black,
+        fontWeight: "bold",
+      
+      },
 })
 
 export default stylesApp;
