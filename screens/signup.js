@@ -1,14 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
   View, Text, ImageBackground,
   SafeAreaView,
   KeyboardAvoidingView
-  , ScrollView, StyleSheet, TextInput
+  , ScrollView, StyleSheet, TextInput, ActivityIndicator
 } from 'react-native';
 import stylesApp from '../utils/styles';
-import { white, black } from '../utils/colors';
+import { white, black, red } from '../utils/colors';
 import AppButton from '../components/AppButton';
-import { validateEmpty,isValidEmail } from '../utils/validation';
+import { validateEmpty, isValidEmail, validateFirstName ,validateLastName,validateNumber,validatePassword, validateName} from '../utils/validation';
 
 
 
@@ -19,7 +19,7 @@ export const SignUpScreen = () => {
   const [phone, setPhoneNumber] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [confirmPassword, setConfirmPassword] = React.useState('');
-  const [error, setError] = React.useState('This Filed is Required*');
+
 
   const firstNameRef = React.useRef()
   const lastNameRef = React.useRef()
@@ -27,6 +27,18 @@ export const SignUpScreen = () => {
   const passwordRef = React.useRef()
   const confirmPasswordRef = React.useRef()
   const phoneRef = React.useRef()
+  const [loading, setLoading] = useState(false);
+
+  let error = '';
+
+  const displayLoader = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
+  }
+
+
 
   return (<SafeAreaView style={{ flex: 1 }}>
     <ImageBackground source={require("../src/assets/background.png")}
@@ -45,6 +57,7 @@ export const SignUpScreen = () => {
         flex: 1, paddingVertical: 20,
         alignSelf: 'stretch',
         justifyContent: 'center',
+        alignContent: 'center',
         paddingHorizontal: 30,
 
       }}>
@@ -108,7 +121,7 @@ export const SignUpScreen = () => {
 
             />
             <TextInput
-            ref={passwordRef}
+              ref={passwordRef}
               style={styles.input}
               onChangeText={(text) => setPassword(text)}
               value={password}
@@ -130,33 +143,64 @@ export const SignUpScreen = () => {
 
             />
 
+            {
+              loading ? 
+              <View style={styles.cneterdView}>
+ 
+              <ActivityIndicator size="large" color="#0000ff"
+                style={{
+                  flex: 1,
+                  alignItems: 'center',
+                  padding: 12,
+                  backgroundColor: '#555',
+                  borderRadius: 12,
+                  justifyContent: 'center', 
+                  flex: 1,
+                  alignContent: 'center', alignSelf: 'center'
+                }} animating={loading} /> 
+                </View>: null
+            }
+
+
 
             <AppButton title={'SignUp'} onPress={() => {
-               console.log(`hii.....${fname} ${email}`)
-                 // Validate password
+              error = ''
               if (validateEmpty(fname)) {
-                setError('This Filed is Required*')
-                console.log('This Filed is Required*',error)
-
+                error = 'First Name is required'
+              }else if (!validateName(fname)) {
+                error = 'Invalid First  Name'
+              
+              }else if (validateEmpty(lname)) {
+                error = 'Last Name is required'
+              } 
+              else if (!validateName(lname)) {
+                error = 'Invalid Last  Name'
+              
               }else if (validateEmpty(email)) {
-                setError('Email is required')
+                error = 'Email is Required*'
               } else if (!isValidEmail(email)) {
-                setError('Invalid email format')
-              }else{
-                setError('')
+                error = 'Invalid email format'
               }
-             
+              else if (validateEmpty(phone)) {
+                error = 'Phone no  is Required*'
+              }
+              else if (validateNumber(phone)) {
+                error = 'Invalid Phone no,.'
+              } else if (validateEmpty(password)) {
+                error = 'Password is required is Required*'
+              }else if (validateEmpty(confirmPassword)) {
+                error = 'Confirm Pasword  is Required*'
+              }  else {
+                error = ''
+              }
+              if (error == '') {
 
-              // if (!validateEmsetFirstName.password.length < 6) {
-              //   errors.password = 'Password must be at least 6 characters long';
-              // }
-              console.log("setError",error)
-                   if(error==''){
-                    
-                      console.warn('Sucess')
-                   }else{
-                    console.warn(`Hwllo ${error}`)
-                   }
+                console.warn('Sucess')
+              } else {
+                displayLoader();
+                console.warn(`${error}`)
+              }
+
 
             }
             } />
@@ -176,7 +220,12 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 1,
     borderRadius: 20,
-
     padding: 10,
+  },
+  cneterdView : {
+    flex:1,
+    alignItems:'center',
+    justifyContent:'center',
+    alignContent:'center',
   },
 });
