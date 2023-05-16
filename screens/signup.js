@@ -10,7 +10,7 @@ import { white, black, red } from '../utils/colors';
 import AppButton from '../components/AppButton';
 import { validateEmpty, isValidEmail, validateFirstName ,validateLastName,validateNumber,validatePassword, validateName} from '../utils/validation';
 
-
+import OverlayActivityIndicator from '../components/Loder';
 
 export const SignUpScreen = () => {
   const [fname, setFirstName] = React.useState('');
@@ -29,6 +29,7 @@ export const SignUpScreen = () => {
   const phoneRef = React.useRef()
   const [loading, setLoading] = useState(false);
 
+
   let error = '';
 
   const displayLoader = () => {
@@ -42,7 +43,10 @@ export const SignUpScreen = () => {
 
   return (<SafeAreaView style={{ flex: 1 }}>
     <ImageBackground source={require("../src/assets/background.png")}
-      resizeMode='stretch' style={{ height: '100%', width: '100%' }}>
+      resizeMode='stretch' style={{ height: '100%', width: '100%',justifyContent:'center',alignContent:'center'}}>
+     <View style={{ flex:1,justifyContent:'center',alignContent:'center',}}>
+     
+     
       <Text style={[stylesApp.appTextBold64, {
         alignSelf: 'center', marginTop: 30,
         fontStyle: 'italic'
@@ -53,19 +57,35 @@ export const SignUpScreen = () => {
       }}>Create your  account</Text>
       <View style={{
         marginTop: 20,
-        backgroundColor: white, borderTopLeftRadius: 150,
+        backgroundColor: white, borderTopLeftRadius: 120,
         flex: 1, paddingVertical: 20,
-        alignSelf: 'stretch',
         justifyContent: 'center',
         alignContent: 'center',
         paddingHorizontal: 30,
 
       }}>
 
+{/* {
+              loading ? 
+              <View style={styles.cneterdView}>
+ 
+              <ActivityIndicator size="large" color="#0000ff"
+                style={{
+            
+                  alignItems: 'center',
+                  padding: 25,
+                  backgroundColor: '#555',
+                  borderRadius: 12,
+              
+                }} animating={loading} /> 
+                </View>: null
+            } */}
 
-
+      {loading && <OverlayActivityIndicator />}
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View>
+       
+
+          <View >
             <TextInput
               style={styles.input}
               onChangeText={(text) => setFirstName(text)}
@@ -143,24 +163,7 @@ export const SignUpScreen = () => {
 
             />
 
-            {
-              loading ? 
-              <View style={styles.cneterdView}>
- 
-              <ActivityIndicator size="large" color="#0000ff"
-                style={{
-                  flex: 1,
-                  alignItems: 'center',
-                  padding: 12,
-                  backgroundColor: '#555',
-                  borderRadius: 12,
-                  justifyContent: 'center', 
-                  flex: 1,
-                  alignContent: 'center', alignSelf: 'center'
-                }} animating={loading} /> 
-                </View>: null
-            }
-
+        
 
 
             <AppButton title={'SignUp'} onPress={() => {
@@ -183,7 +186,7 @@ export const SignUpScreen = () => {
               }
               else if (validateEmpty(phone)) {
                 error = 'Phone no  is Required*'
-              }
+              } 
               else if (validateNumber(phone)) {
                 error = 'Invalid Phone no,.'
               } else if (validateEmpty(password)) {
@@ -193,11 +196,12 @@ export const SignUpScreen = () => {
               }  else {
                 error = ''
               }
-              if (error == '') {
 
+
+              if (error == '') {
+                displayLoader();
                 console.warn('Sucess')
               } else {
-                displayLoader();
                 console.warn(`${error}`)
               }
 
@@ -206,9 +210,10 @@ export const SignUpScreen = () => {
             } />
           </View>
         </ScrollView>
-
+       
       </View>
-
+ 
+      </View>
     </ImageBackground>
   </SafeAreaView>)
 };
