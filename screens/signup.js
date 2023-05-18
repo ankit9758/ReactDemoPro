@@ -42,7 +42,7 @@ export const SignUpScreen = () => {
 
 
   return (<SafeAreaView style={{ flex: 1 }}>
-    <ImageBackground source={require("../src/assets/background.png")}
+    <ImageBackground source={require("../src/assets/images/background.png")}
       resizeMode='stretch' style={{ height: '100%', width: '100%',justifyContent:'center',alignContent:'center'}}>
      <View style={{ flex:1,justifyContent:'center',alignContent:'center',}}>
      

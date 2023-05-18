@@ -7,6 +7,7 @@ import { ForgotPasswordScreen } from './screens/forgotpassword';
 import { SignUpScreen } from './screens/signup';
 import { Homescreen } from './screens/home';
 import SplashScreen from 'react-native-splash-screen';
+import OnBoardingScreen from './screens/onborading';
 
 const stack = createNativeStackNavigator();
 
@@ -17,10 +18,11 @@ const App = () => {
   }, [])
   return (<NavigationContainer>
     <stack.Navigator screenOptions={{ headerShown: false }}>
-      <stack.Screen name='Home' component={Homescreen} />
+      <stack.Screen name='Home' component={Homescreen}  />
       <stack.Screen name='Login' component={LoginScreen} />
       <stack.Screen name='SignUp' component={SignUpScreen} />
       <stack.Screen name='ForgotPassword' component={ForgotPasswordScreen} />
+      <stack.Screen name='Onboarding' component={OnBoardingScreen} />
 
     </stack.Navigator>
   </NavigationContainer>)
