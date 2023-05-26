@@ -8,6 +8,7 @@ import { SignUpScreen } from './screens/signup';
 import { Homescreen } from './screens/home';
 import SplashScreen from 'react-native-splash-screen';
 import OnBoardingScreen from './screens/onborading';
+import AllModals from './screens/modals';
 
 const stack = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ const App = () => {
       <stack.Screen name='SignUp' component={SignUpScreen} />
       <stack.Screen name='ForgotPassword' component={ForgotPasswordScreen} />
       <stack.Screen name='Onboarding' component={OnBoardingScreen} />
+      <stack.Screen name='modals' component={AllModals} />
 
     </stack.Navigator>
   </NavigationContainer>)

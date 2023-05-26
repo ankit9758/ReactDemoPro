@@ -5,7 +5,6 @@ import stylesApp from '../utils/styles';
 import { black, green, white } from '../utils/colors';
 import AppInputFiled from '../components/AppInputField';
 import AppButton from '../components/AppButton';
-import { TextInput } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { validateEmail, validateEmpty } from '../utils/validation';
 
@@ -16,6 +15,9 @@ export default LoginScreen = (props) => {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+
+
+  
 
   const saveJSONToAsyncStorage = async (key, data) => {
     try {

@@ -87,6 +87,7 @@ const OnBoardingScreen = () => {
         }
 
     }
+
     return (<SafeAreaView style={{ flex: 1, backgroundColor: black}} >
         <StatusBar backgroundColor={red} />
         <FlatList
@@ -98,6 +99,7 @@ const OnBoardingScreen = () => {
             horizontal
             pagingEnabled
             showsHorizontalScrollIndicator={false}
+         
 
             // onScroll={Animated.event([{nativeEvent: {}}])}
             renderItem={({ item }) => <Slide item={item} />}
